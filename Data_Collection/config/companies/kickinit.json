@@ -1,0 +1,22 @@
+{
+    "company_id": "kickinit",
+    "company_name": "New Fisk Company",
+    "website": "https://www.kickinit.io",
+    "industry": "Streetwear & Footwear",
+    "products": [
+        {
+            "product_id": "urban_sneakers",
+            "product_name": "Urban Sneakers",
+            "features": [
+                "recycled materials",
+                "water-resistant",
+                "arch support"
+            ],
+            "constraints": [
+                "under $150",
+                "daily commute",
+                "eco-conscious"
+            ]
+        }
+    ]
+}

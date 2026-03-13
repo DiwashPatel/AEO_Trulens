@@ -1,30 +1,54 @@
 import os
 import json
-import psycopg2
+import sqlite3
 from datetime import datetime
 
-DB_CONFIG = {
-    "host": "localhost",
-    "database": "botb",
-    "user": "postgres",
-    "password": "botbpatel"   
-}
-
+DB_FILE = "botb.db"  # This will be created in your root folder
 DATA_DIR = "data"
 
+def setup_db():
+    """Creates the SQLite tables if they don't exist."""
+    conn = sqlite3.connect(DB_FILE)
+    cur = conn.cursor()
+    
+    # Table for general run info
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT,
+            company_id TEXT,
+            product_id TEXT,
+            feature TEXT,
+            constraint_text TEXT,
+            model_name TEXT,
+            raw_text TEXT
+        )
+    """)
+    
+    # Table for specific recommendations (The "Gold" data)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS recommendations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            run_id INTEGER,
+            product_name TEXT,
+            reason TEXT,
+            source_url TEXT,
+            FOREIGN KEY (run_id) REFERENCES runs (id)
+        )
+    """)
+    conn.commit()
+    conn.close()
 
 def parse_timestamp(ts):
     try:
-        return datetime.fromisoformat(ts)
+        return datetime.fromisoformat(ts).isoformat()
     except Exception:
-        return None
-
+        return datetime.now().isoformat()
 
 def main():
-
-    conn = psycopg2.connect(**DB_CONFIG)
+    setup_db() # Ensure tables exist
+    conn = sqlite3.connect(DB_FILE)
     cur = conn.cursor()
-
     count = 0
 
     for root, dirs, files in os.walk(DATA_DIR):
@@ -33,7 +57,6 @@ def main():
                 continue
 
             path = os.path.join(root, file)
-
             print(f"Ingesting: {path}")
 
             with open(path, "r", encoding="utf-8") as f:
@@ -45,78 +68,46 @@ def main():
 
                     model_data = record.get("model", {})
                     response_data = record.get("response", {})
-                    usage = response_data.get("usage") or {}
-
                     timestamp = parse_timestamp(record.get("timestamp"))
 
-
-                    # Insert run
+                    # Insert run (SQLite uses '?' instead of '%s')
                     cur.execute("""
                         INSERT INTO runs (
-                            timestamp,
-                            company_id,
-                            product_id,
-                            feature,
-                            constraint_text,
-                            model_id,
-                            model_name,
-                            provider,
-                            search_enabled,
-                            run_number,
-                            input_tokens,
-                            output_tokens,
-                            total_tokens,
-                            raw_text
+                            timestamp, company_id, product_id, feature, 
+                            constraint_text, model_name, raw_text
                         )
-                        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                        RETURNING id
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
                     """, (
                         timestamp,
                         record.get("company_id"),
                         record.get("product_id"),
                         record.get("feature"),
                         record.get("constraint"),
-                        model_data.get("id"),
                         model_data.get("name"),
-                        model_data.get("provider"),
-                        model_data.get("search_enabled", False),
-                        record.get("run_number"),
-                        usage.get("input_tokens"),
-                        usage.get("output_tokens"),
-                        usage.get("total_tokens"),
                         response_data.get("raw_text")
                     ))
                     
-                    count +=1 
-                    print("....ingested..{count}...data")
-
-                    run_id = cur.fetchone()[0]
-
+                    run_id = cur.lastrowid # Get the ID of the run we just inserted
+                    
                     parsed = response_data.get("parsed_json") or {}
                     recommendations = parsed.get("recommendations") or []
 
                     for rec in recommendations:
                         cur.execute("""
-                            INSERT INTO recommendations (
-                                run_id,
-                                product_name,
-                                reason,
-                                source_url
-                            )
-                            VALUES (%s,%s,%s,%s)
+                            INSERT INTO recommendations (run_id, product_name, reason, source_url)
+                            VALUES (?, ?, ?, ?)
                         """, (
                             run_id,
                             rec.get("product"),
                             rec.get("reason"),
                             rec.get("source_url")
                         ))
+                    
+                    count += 1
 
     conn.commit()
-    cur.close()
     conn.close()
-
-    print("Ingestion complete.")
-
+    print(f"Ingestion complete. {count} records processed.")
 
 if __name__ == "__main__":
     main()
