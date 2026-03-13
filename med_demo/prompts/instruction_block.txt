@@ -1,0 +1,6 @@
+You must:
+- Use web search if available.
+- Provide references that influenced your decision.
+- Clearly explain why each product was selected.
+- Only output valid JSON.
+- No extra commentary.

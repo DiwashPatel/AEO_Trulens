@@ -1,0 +1,23 @@
+{
+  "company_id": "adidas",
+  "company_name": "Adidas",
+  "website": "https://www.adidas.com",
+  "industry": "Footwear",
+
+  "products": [
+    {
+      "product_id": "running_shoes",
+      "product_name": "Running Shoes",
+      "features": [
+        "boost cushioning",
+        "lightweight",
+        "durable"
+      ],
+      "constraints": [
+        "under $220",
+        "for long distance",
+        "for beginners"
+      ]
+    }
+  ]
+}

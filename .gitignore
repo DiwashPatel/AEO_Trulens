@@ -1,3 +1,57 @@
 .env
 .venv
 dem_venv/
+__pycache__
+__pycache__/
+
+
+# --- API Keys & Secrets (CRITICAL) ---
+.env
+.env.local
+.env.*
+# Ignore any json files that might be GCP service account keys
+*-service-account.json
+credentials.json
+
+# --- Python Environments ---
+.venv/
+venv/
+env/
+# Your specific venv names found in your logs:
+dem_venv/
+med_venv/
+# Build artifacts
+bin/
+lib/
+include/
+share/
+
+# --- Python Caching & Metadata ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Project Specific Data ---
+# Ignore large sample files or logs if they get too big
+*.log
+sample_res.txt
+# Keep your data folder but ignore the contents if they are massive
+# data/*
+# !data/.gitkeep
+
+# --- OS Specific ---
+Thumbs.db
+desktop.ini

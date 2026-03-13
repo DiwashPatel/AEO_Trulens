@@ -1,0 +1,46 @@
+python3 dem_search.py 
+
+Model did not return clean JSON:
+
+Here are top laptop recommendations for coding based on recent expert reviews and guides. Each entry includes the product name, reasoning, and a direct source URL. The format is strictly JSON as you requested:
+
+```json
+{
+  "recommendations": [
+    {
+      "product": "Lenovo ThinkPad T16",
+      "reason": "Excellent all-rounder for general programming: durable, upgradeable, superb keyboard, great for Linux and professional workloads.",
+      "source_url": "https://www.techradar.com/news/best-laptop-for-programming"
+    },
+    {
+      "product": "Apple MacBook Pro 14‑inch (M4)",
+      "reason": "Top-tier performance with M4 chip, long battery life, superb for front‑end, full‑stack, mobile development, and DevOps workflows.",
+      "source_url": "https://www.techradar.com/news/best-laptop-for-programming"
+    },
+    {
+      "product": "MacBook Pro 14\" M3",
+      "reason": "Incredible battery life (~17 hours), M3 chip crushes compilation tasks, gorgeous Liquid Retina XDR display—best overall for developers.",
+      "source_url": "https://laptestpro.com/blog/best-laptops-programming-2026.html"
+    },
+    {
+      "product": "Lenovo ThinkPad X1 Carbon Gen 12",
+      "reason": "Legendary ThinkPad keyboard, lightweight, enterprise-grade build, long battery life—great for Windows developers on the go.",
+      "source_url": "https://laptestpro.com/blog/best-laptops-programming-2026.html"
+    },
+    {
+      "product": "Lenovo Yoga 9i 2‑in‑1 Aura Edition",
+      "reason": "Versatile 2‑in‑1 with bright 2.8K OLED touchscreen, strong performance with Intel Ultra 7, portable and stylish—ideal for hybrid coding workflows.",
+      "source_url": "https://www.tomsguide.com/best-picks/best-2-in-1-laptops"
+    }
+  ]
+}
+```
+
+Let me know if you'd like recommendations tailored to specific coding needs—like game development, AI, budget constraints, or portability.
+
+---- TOOL CALLS (Search Evidence) ----
+
+#### Correct Results why??
+#### Because, the links are real and same for the browsing mode as well...
+
+(dem_venv) diwash@dpmac ~/work/botb/mini_demo % 

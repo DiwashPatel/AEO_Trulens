@@ -1,0 +1,24 @@
+{
+  "company_id": "apple",
+  "company_name": "Apple",
+  "website": "https://www.apple.com",
+  "industry": "Technology",
+
+  "products": [
+    {
+      "product_id": "laptops",
+      "product_name": "Laptops",
+      "features": [
+        "long battery life",
+        "powerful processor",
+        "lightweight",
+        "retina display"
+      ],
+      "constraints": [
+        "under $2000",
+        "for developers",
+        "for video editing"
+      ]
+    }
+  ]
+}

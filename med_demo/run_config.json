@@ -1,0 +1,11 @@
+{
+  "models": [
+    {
+      "id": "gpt_4_1",
+      "name": "gpt-4.1",
+      "provider": "openai",
+      "search_enabled": true
+    }
+  ],
+  "num_runs_per_combination": 1
+}

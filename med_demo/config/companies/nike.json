@@ -1,0 +1,39 @@
+{
+  "company_id": "nike",
+  "company_name": "Nike",
+  "website": "https://www.nike.com",
+  "industry": "Footwear",
+
+  "products": [
+    {
+      "product_id": "running_shoes",
+      "product_name": "Running Shoes",
+      "features": [
+        "comfortable",
+        "lightweight",
+        "breathable",
+        "durable"
+      ],
+      "constraints": [
+        "under $200",
+        "for beginners",
+        "for marathon training",
+        "for wide feet"
+      ]
+    },
+    {
+      "product_id": "basketball_shoes",
+      "product_name": "Basketball Shoes",
+      "features": [
+        "high ankle support",
+        "good grip",
+        "lightweight"
+      ],
+      "constraints": [
+        "under $180",
+        "for indoor courts",
+        "for outdoor courts"
+      ]
+    }
+  ]
+}
