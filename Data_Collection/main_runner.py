@@ -27,16 +27,11 @@ def build_prompt(base_prompt, instruction_block,
                  feature, constraint):
 
     dynamic_block = f"""
-Company: {company['company_name']}
-Industry: {company['industry']}
-Website: {company['website']}
-
-Product: {product['product_name']}
 Feature: {feature}
 Constraint: {constraint}
 
 User Intent:
-I want to buy {product['product_name']} from {company['company_name']}
+I want to buy {product['product_name']}
 that focuses on "{feature}" and satisfies "{constraint}".
 """
 
