@@ -3,6 +3,8 @@
 import os
 import json
 from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def call_openai(model_config: dict, prompt: str) -> dict:
@@ -10,6 +12,22 @@ def call_openai(model_config: dict, prompt: str) -> dict:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("OPENAI_API_KEY not set")
+    # if not api_key:
+    #     return {
+    #         "provider": "openai",
+    #         "model": model_name,
+    #         "raw_text": "MOCK RESPONSE",
+    #         "parsed_json": {
+    #             "recommendations": [
+    #                 {
+    #                     "product": "Demo Product",
+    #                     "reason": "Mock reason",
+    #                     "source_url": "https://example.com"
+    #                 }
+    #             ]
+    #         },
+    #         "usage": None
+    #     }
 
     client = OpenAI(api_key=api_key)
 

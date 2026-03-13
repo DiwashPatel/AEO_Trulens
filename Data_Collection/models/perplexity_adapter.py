@@ -3,7 +3,8 @@
 import os
 import json
 from openai import OpenAI
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def call_perplexity(model_config: dict, prompt: str) -> dict:
 

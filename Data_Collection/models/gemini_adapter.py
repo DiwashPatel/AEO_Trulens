@@ -3,7 +3,8 @@
 import os
 import json
 from google import genai
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def call_gemini(model_config: dict, prompt: str) -> dict:
 

@@ -3,7 +3,8 @@
 import os
 import json
 import anthropic
-
+from dotenv import load_dotenv
+load_dotenv()
 
 def call_claude(model_config: dict, prompt: str) -> dict:
 
