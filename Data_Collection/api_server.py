@@ -9,7 +9,7 @@ from typing import List, Optional
 app = FastAPI(title="AI Search Optimization API")
 
 # --- SECURITY ---
-API_KEY = "your-secret-hackathon-key" # Change this!
+API_KEY = "" #Removed when pushing # we can just get from .env file
 api_key_header = APIKeyHeader(name="X-API-KEY", auto_error=True)
 
 async def validate_api_key(key: str = Depends(api_key_header)):
@@ -74,12 +74,12 @@ async def get_results(company_id: str):
         with open(result_path, "r") as f:
             return json.load(f)
     
-    # Mock data if real data isn't ready yet
+    # Mock data
     return {
         "status": "partial",
         "metrics": {
             "ai_visibility": 65,
             "top_referring_urls": ["https://techcrunch.com", "https://runnersworld.com"],
-            "suggestion": "Include 'Boost Technology' more prominently in your landing page metadata."
+            "suggestion": "Mock Suggestions"
         }
     }
